@@ -1,0 +1,29 @@
+{
+    "name": "baka/phalcon-sqlsrv",
+    "description": "Baka Component for Phalcon - MS SQL Server (PDO) Adapter",
+    "keywords": ["framework", "phalcon", "sqlsrv"],
+    "authors": [{
+        "name": "ToNict",
+        "email": "shinobi.wk@hotmail.com"
+    }],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.0",
+        "ext-phalcon": ">=3.0.0"
+    },
+    "require-dev": {
+        "codeception/verify": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Phalcon\\DB\\": "Phalcon/Db/",
+            "Phalcon\\Logger\\": "Phalcon/Logger/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Phalcon\\DB\\": "Phalcon/Db/",
+            "Phalcon\\Logger\\": "Phalcon/Logger/"
+        }
+    }
+}

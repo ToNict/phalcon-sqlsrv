@@ -1,5 +1,4 @@
 <?php
-
 namespace Phalcon\Db\Adapter\Pdo;
 
 use Phalcon\Db\Column;
@@ -35,7 +34,7 @@ class Sqlsrv extends \Phalcon\Db\Adapter\Pdo implements \Phalcon\Db\AdapterInter
      *
      * @return bool
      */
-    public function connect($descriptor = null)
+    public function connect(array $descriptor = null)
     {
         if (is_null($descriptor) === true) {
             $descriptor = $this->_descriptor;
@@ -51,22 +50,18 @@ class Sqlsrv extends \Phalcon\Db\Adapter\Pdo implements \Phalcon\Db\AdapterInter
             $options = array();
         }
 
-        $options[\PDO::ATTR_ERRMODE] = \PDO::ERRMODE_EXCEPTION;
-        $options[\PDO::ATTR_STRINGIFY_FETCHES] = true;
+        $dsn = "sqlsrv:server=" . $descriptor['host'] . ";database=" . $descriptor['dbname'] . ";";
+        $dbusername = $descriptor['username'];
+        $dbpassword = $descriptor['password'];
 
-        $this->_pdo = new \PDO("sqlsrv:server={$descriptor['host']};database={$descriptor['dbname']}", $descriptor['username'], $descriptor['password'], $options);
-
-//        $this->execute('SET QUOTED_IDENTIFIER ON');
-//        $this->execute("SET ANSI_WARNINGS ON ");
-//        $this->execute("SET ANSI_NULLS ON ");
-//        $this->execute("SET NOCOUNT ON ");
-//        $this->execute("SET XACT_ABORT ON ");
+        $this->_pdo = new \PDO($dsn, $dbusername, $dbpassword);
+        $this->_pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
         /*
          * Set dialect class
          */
         if (isset($descriptor['dialectClass']) === false) {
-            $dialectClass = 'Phalcon\\Db\\Dialect\\' . $this->_dialectType;
+            $dialectClass = 'Phalcon\\Db\\Dialect\\' . ucfirst($this->_dialectType);
         } else {
             $dialectClass = $descriptor['dialectClass'];
         }
@@ -132,7 +127,7 @@ class Sqlsrv extends \Phalcon\Db\Adapter\Pdo implements \Phalcon\Db\AdapterInter
                     $definition['bindType'] = Column::BIND_PARAM_INT;
                     $autoIncrement = true;
                     break;
-                case 'bigint' :
+                case 'bigint':
                     $definition['type'] = Column::TYPE_BIGINTEGER;
                     $definition['isNumeric'] = true;
                     $definition['bindType'] = Column::BIND_PARAM_INT;
@@ -364,56 +359,56 @@ class Sqlsrv extends \Phalcon\Db\Adapter\Pdo implements \Phalcon\Db\AdapterInter
      * @return bool
      */
 //    public function execute($sqlStatement, $bindParams = null, $bindTypes = null)
-//    {
-//        $eventsManager = $this->_eventsManager;
-//
-//        /*
-//         * Execute the beforeQuery event if a EventsManager is available
-//         */
-//        if (is_object($eventsManager)) {
-//            $this->_sqlStatement = $sqlStatement;
-//            $this->_sqlVariables = $bindParams;
-//            $this->_sqlBindTypes = $bindTypes;
-//
-//            if ($eventsManager->fire('db:beforeQuery', $this, $bindParams) === false) {
-//                return false;
-//            }
-//        }
-//
-//        /*
-//         * Initialize affectedRows to 0
-//         */
-//        $affectedRows = 0;
-//
-//        $pdo = $this->_pdo;
-//
-//        $cursor = \PDO::CURSOR_SCROLL;
-//        if (strpos($sqlStatement, 'exec') !== false) {
-//            $cursor = \PDO::CURSOR_FWDONLY;
-//        }
-//
-//        if (is_array($bindParams)) {
-//            $statement = $pdo->prepare($sqlStatement, array(\PDO::ATTR_CURSOR => $cursor));
-//            if (is_object($statement)) {
-//                $newStatement = $this->executePrepared($statement, $bindParams, $bindTypes);
-//                $affectedRows = $newStatement->rowCount();
-//            }
-//        } else {
-////            $statement = $pdo->prepare($sqlStatement, array(\PDO::ATTR_CURSOR => $cursor));
-////            $statement->execute();
-//            $affectedRows = $pdo->exec($sqlStatement);
-//        }
-//
-//        /*
-//         * Execute the afterQuery event if an EventsManager is available
-//         */
-//        if (is_int($affectedRows)) {
-//            $this->_affectedRows = affectedRows;
-//            if (is_object($eventsManager)) {
-//                $eventsManager->fire('db:afterQuery', $this, $bindParams);
-//            }
-//        }
-//
-//        return true;
-//    }
+    //    {
+    //        $eventsManager = $this->_eventsManager;
+    //
+    //        /*
+    //         * Execute the beforeQuery event if a EventsManager is available
+    //         */
+    //        if (is_object($eventsManager)) {
+    //            $this->_sqlStatement = $sqlStatement;
+    //            $this->_sqlVariables = $bindParams;
+    //            $this->_sqlBindTypes = $bindTypes;
+    //
+    //            if ($eventsManager->fire('db:beforeQuery', $this, $bindParams) === false) {
+    //                return false;
+    //            }
+    //        }
+    //
+    //        /*
+    //         * Initialize affectedRows to 0
+    //         */
+    //        $affectedRows = 0;
+    //
+    //        $pdo = $this->_pdo;
+    //
+    //        $cursor = \PDO::CURSOR_SCROLL;
+    //        if (strpos($sqlStatement, 'exec') !== false) {
+    //            $cursor = \PDO::CURSOR_FWDONLY;
+    //        }
+    //
+    //        if (is_array($bindParams)) {
+    //            $statement = $pdo->prepare($sqlStatement, array(\PDO::ATTR_CURSOR => $cursor));
+    //            if (is_object($statement)) {
+    //                $newStatement = $this->executePrepared($statement, $bindParams, $bindTypes);
+    //                $affectedRows = $newStatement->rowCount();
+    //            }
+    //        } else {
+    ////            $statement = $pdo->prepare($sqlStatement, array(\PDO::ATTR_CURSOR => $cursor));
+    ////            $statement->execute();
+    //            $affectedRows = $pdo->exec($sqlStatement);
+    //        }
+    //
+    //        /*
+    //         * Execute the afterQuery event if an EventsManager is available
+    //         */
+    //        if (is_int($affectedRows)) {
+    //            $this->_affectedRows = affectedRows;
+    //            if (is_object($eventsManager)) {
+    //                $eventsManager->fire('db:afterQuery', $this, $bindParams);
+    //            }
+    //        }
+    //
+    //        return true;
+    //    }
 }
