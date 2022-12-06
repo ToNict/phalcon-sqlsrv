@@ -1,6 +1,7 @@
 # Phalcon - MS SQL Server (PDO) Adapter
 
-- Phalcon 3.0+ support
+- Phalcon 5.0+ support
+- PHP 8.1 support
 
 ```php
 $di->set('db', function() use ($config) {
