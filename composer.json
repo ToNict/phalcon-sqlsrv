@@ -1,5 +1,5 @@
 {
-    "name": "SageDavis/phalcon-sqlsrv",
+    "name": "sagedavis/phalcon-sqlsrv",
     "description": "Sage IT Component for Phalcon - MS SQL Server (PDO) Adapter",
     "keywords": ["framework", "phalcon", "sqlsrv"],
     "authors": [{
