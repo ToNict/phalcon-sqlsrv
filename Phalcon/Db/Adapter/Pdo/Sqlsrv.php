@@ -254,8 +254,8 @@ class Sqlsrv extends \Phalcon\Db\Adapter\Pdo\AbstractPdo implements \Phalcon\Db\
             /*
              * Check if the column allows null values
              */
-            if ($field['NULLABLE'] == 0) {
-                $definition['notNull'] = true;
+            if ($field['NULLABLE'] == 1) {
+                $definition['notNull'] = false;
             }
 
             /*
