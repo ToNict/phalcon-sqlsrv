@@ -13,7 +13,7 @@ namespace Phalcon\Db\Result;
  * }
  * </code>.
  */
-class PdoSqlsrv extends Pdo
+class PdoSqlsrv extends \Phalcon\Db\Result\PdoResult
 {
     /**
      * Gets number of rows returned by a resultset
@@ -24,17 +24,17 @@ class PdoSqlsrv extends Pdo
      *
      * @return int
      */
-    public function numRows()
+    public function numRows(): int
     {
-        $rowCount = $this->_rowCount;
+        $rowCount = $this->rowCount;
         if ($rowCount === false) {
-            $rowCount = $this->_pdoStatement->rowCount();
+            $rowCount = $this->pdoStatement->rowCount();
 
             if ($rowCount === false) {
                 parent::numRows();
             }
 
-            $this->_rowCount = $rowCount;
+            $this->rowCount = $rowCount;
         }
 
         return $rowCount;

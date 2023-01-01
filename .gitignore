@@ -1,0 +1,8 @@
+/vendor/
+._*
+.ssh/
+.viminfo
+.bash*
+.env*
+.sw*
+composer.lock

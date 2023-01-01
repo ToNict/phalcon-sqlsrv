@@ -1,0 +1,44 @@
+{
+    "name": "baka/phalcon-sqlsrv",
+    "description": "Sage IT Component for Phalcon - MS SQL Server (PDO) Adapter",
+    "keywords": ["framework", "phalcon", "sqlsrv"],
+    "authors": [{
+        "name": "ToNict",
+        "email": "shinobi.wk@hotmail.com"
+    },{
+        "name": "Baka",
+        "email": "info@mctekk.com"
+    },{
+        "name": "Sage IT Solutions",
+        "email": "daniel.davis@sageitsolutions.net"
+    }],
+    "support": {
+        "issues": "https://github.com/phalcon/incubator/issues",
+        "source": "https://github.com/phalcon/incubator",
+        "forum": "https://forum.phalconphp.com/",
+        "docs": "https://docs.phalconphp.com/",
+        "irc": "irc://irc.freenode.org/phalconphp",
+        "rss": "https://blog.phalconphp.com/rss",
+        "email": "support@phalconphp.com"
+    },
+    "require": {
+        "php": ">=7.0",
+        "ext-pdo": "*",
+        "ext-phalcon": ">=4.0.0 || >= 5.0"
+    },
+    "require-dev": {
+        "codeception/verify": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Phalcon\\Db\\": "Phalcon/Db/",
+            "Phalcon\\Logger\\": "Phalcon/Logger/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Phalcon\\Db\\": "Phalcon/Db/",
+            "Phalcon\\Logger\\": "Phalcon/Logger/"
+        }
+    }
+}

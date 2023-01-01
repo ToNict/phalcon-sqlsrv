@@ -1,5 +1,8 @@
 # Phalcon - MS SQL Server (PDO) Adapter
-- Phalcon 2.0.8 support
+
+- Phalcon 5.0+ support
+- PHP 8.1 support
+
 ```php
 $di->set('db', function() use ($config) {
 	return new \Phalcon\Db\Adapter\Pdo\Sqlsrv(array(
